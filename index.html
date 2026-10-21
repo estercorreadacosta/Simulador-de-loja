@@ -1,190 +1,201 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minha Loja</title>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f1f5f9;
-      color: #1e293b;
-      text-align: center;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      color: #2563eb;
-    }
-
-    .painel {
-      background: white;
-      max-width: 500px;
-      margin: 15px auto;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px #00000012;
-    }
-
-    .produto {
-      border: 1px solid #cbd5e1;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 10px;
-    }
-
-    button {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      margin: 5px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 15px;
-    }
-
-    button:hover {
-      background: #1d4ed8;
-    }
-
-    .vender {
-      background: #16a34a;
-    }
-
-    .vender:hover {
-      background: #15803d;
-    }
-
-    #mensagem {
-      font-weight: bold;
-      min-height: 24px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Cafeteria</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f8efe5;
+  color: #493126;
+}
+header {
+  background: #603c2b;
+  color: white;
+  text-align: center;
+  padding: 28px 12px;
+}
+header h1 { margin: 0 0 8px; }
+header p { margin: 0; }
+main { max-width: 900px; margin: auto; padding: 18px; }
+.painel {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px #603c2b15;
+}
+.resumo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.numero {
+  background: #f5e5d4;
+  padding: 15px 5px;
+  text-align: center;
+  border-radius: 12px;
+  overflow-wrap: anywhere;
+}
+.numero strong { display: block; margin-top: 8px; font-size: 18px; }
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+}
+.produto {
+  border: 1px solid #ead8c7;
+  padding: 16px;
+  border-radius: 14px;
+  text-align: center;
+}
+.emoji { font-size: 42px; }
+.produto h3 { margin: 8px 0; }
+.produto p { margin: 8px 0; }
+button {
+  border: 0;
+  padding: 10px 13px;
+  margin: 4px 2px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.comprar { background: #dfb17b; color: #382315; }
+.vender { background: #64845b; color: white; }
+button:hover { filter: brightness(.94); }
+#mensagem {
+  font-weight: bold;
+  min-height: 24px;
+  text-align: center;
+}
+footer { text-align: center; padding: 20px; color: #765b4a; }
+@media(max-width: 480px) {
+  .resumo { grid-template-columns: 1fr; }
+}
+</style>
 </head>
-
 <body>
-  <h1>🏪 Minha Loja</h1>
-  <p>Seu primeiro simulador de negócios!</p>
+<header>
+  <h1>☕ Minha Cafeteria</h1>
+  <p>Seu cantinho do café! Café quentinho, sonhos grandes. 🧁</p>
+</header>
 
-  <div class="painel">
-    <h2>📊 Situação da loja</h2>
-    <p>Dinheiro: <strong id="dinheiro">R$ 100,00</strong></p>
-    <p>Lucro total: <strong id="lucro">R$ 0,00</strong></p>
-    <p>Produtos em estoque: <strong id="estoque">0</strong></p>
-  </div>
-
-  <div class="painel">
-    <h2>📦 Produtos</h2>
-
-    <div class="produto">
-      <h3>🥤 Refrigerante</h3>
-      <p>Compra: R$ 5 | Venda: R$ 8</p>
-      <button onclick="comprar('refri')">
-        Comprar produto
-      </button>
-      <button class="vender" onclick="vender('refri')">
-        Vender produto
-      </button>
-      <p>Estoque: <span id="refri">0</span></p>
+<main>
+  <section class="painel">
+    <h2>📊 Situação da cafeteria</h2>
+    <div class="resumo">
+      <div class="numero">💰 Dinheiro<strong id="dinheiro">R$ 100,00</strong></div>
+      <div class="numero">📈 Lucro total<strong id="lucro">R$ 0,00</strong></div>
+      <div class="numero">📦 Itens no estoque<strong id="estoque">0</strong></div>
     </div>
+  </section>
 
-    <div class="produto">
-      <h3>🍫 Chocolate</h3>
-      <p>Compra: R$ 3 | Venda: R$ 5</p>
-      <button onclick="comprar('chocolate')">
-        Comprar produto
-      </button>
-      <button class="vender" onclick="vender('chocolate')">
-        Vender produto
-      </button>
-      <p>Estoque: <span id="chocolate">0</span></p>
-    </div>
+  <section class="painel">
+    <h2>🍰 Cardápio da loja</h2>
+    <p>Compre produtos para abastecer o estoque e venda para ganhar dinheiro!</p>
+    <div id="produtos" class="produtos"></div>
+    <p id="mensagem" aria-live="polite">Bem-vinda à sua cafeteria! ☕</p>
+  </section>
 
-    <p id="mensagem">Bem-vindo à sua loja!</p>
-  </div>
+  <section class="painel">
+    <h2>✨ Objetivo</h2>
+    <p>Comece com R$ 100,00, administre seu dinheiro e faça sua cafeteria crescer!</p>
+    <button class="comprar" onclick="melhorar()">🪴 Comprar decoração — R$ 50</button>
+    <p id="decoracao">Sua cafeteria está esperando por você!</p>
+  </section>
+</main>
 
-  <script>
-    let dinheiro = 100;
-    let lucro = 0;
+<footer>Feito com ☕ e carinho | Minha Cafeteria</footer>
 
-    let produtos = {
-      refri: {
-        custo: 5,
-        preco: 8,
-        estoque: 0
-      },
-      chocolate: {
-        custo: 3,
-        preco: 5,
-        estoque: 0
-      }
-    };
+<script>
+const catalogo = [
+  { nome: "Café expresso", emoji: "☕", custo: 3, venda: 7, estoque: 0 },
+  { nome: "Cappuccino", emoji: "🥤", custo: 5, venda: 11, estoque: 0 },
+  { nome: "Bolo de chocolate", emoji: "🍰", custo: 6, venda: 13, estoque: 0 },
+  { nome: "Cookie", emoji: "🍪", custo: 2, venda: 5, estoque: 0 },
+  { nome: "Pão de queijo", emoji: "🧀", custo: 3, venda: 7, estoque: 0 },
+  { nome: "Suco natural", emoji: "🧃", custo: 4, venda: 9, estoque: 0 }
+];
 
-    function atualizarTela() {
-      document.getElementById("dinheiro").textContent =
-        dinheiro.toLocaleString("pt-BR", {
-          style: "currency",
-          currency: "BRL"
-        });
+let dinheiro = 100;
+let lucro = 0;
+let decorada = false;
 
-      document.getElementById("lucro").textContent =
-        lucro.toLocaleString("pt-BR", {
-          style: "currency",
-          currency: "BRL"
-        });
+const moeda = n => n.toLocaleString("pt-BR", {
+  style: "currency", currency: "BRL"
+});
 
-      let totalEstoque = 0;
+function mostrar() {
+  document.getElementById("dinheiro").textContent = moeda(dinheiro);
+  document.getElementById("lucro").textContent = moeda(lucro);
+  document.getElementById("estoque").textContent =
+    catalogo.reduce((total, p) => total + p.estoque, 0);
 
-      for (let nome in produtos) {
-        document.getElementById(nome).textContent =
-          produtos[nome].estoque;
+  document.getElementById("produtos").innerHTML = catalogo.map((p, i) => `
+    <article class="produto">
+      <div class="emoji">${p.emoji}</div>
+      <h3>${p.nome}</h3>
+      <p>Compra: ${moeda(p.custo)}</p>
+      <p>Venda: ${moeda(p.venda)}</p>
+      <p>Em estoque: <strong>${p.estoque}</strong></p>
+      <button class="comprar" onclick="comprar(${i})">Comprar 1</button>
+      <button class="vender" onclick="vender(${i})">Vender 1</button>
+    </article>
+  `).join("");
+}
 
-        totalEstoque += produtos[nome].estoque;
-      }
+function avisar(texto) {
+  document.getElementById("mensagem").textContent = texto;
+}
 
-      document.getElementById("estoque").textContent =
-        totalEstoque;
-    }
+function comprar(i) {
+  const p = catalogo[i];
+  if (dinheiro < p.custo) {
+    avisar("Dinheiro insuficiente! Venda produtos primeiro. 💸");
+    return;
+  }
+  dinheiro -= p.custo;
+  p.estoque++;
+  lucro -= p.custo;
+  avisar("Você comprou: " + p.nome + "! 📦");
+  mostrar();
+}
 
-    function comprar(nome) {
-      let produto = produtos[nome];
+function vender(i) {
+  const p = catalogo[i];
+  if (p.estoque < 1) {
+    avisar("Sem estoque de " + p.nome + "! Compre primeiro. 📦");
+    return;
+  }
+  p.estoque--;
+  dinheiro += p.venda;
+  lucro += p.venda;
+  avisar("Venda realizada: " + p.nome + "! Obrigada, cliente! ☕");
+  mostrar();
+}
 
-      if (dinheiro >= produto.custo) {
-        dinheiro -= produto.custo;
-        produto.estoque++;
+function melhorar() {
+  if (decorada) {
+    avisar("Sua cafeteria já tem uma decoração nova! 🪴");
+    return;
+  }
+  if (dinheiro < 50) {
+    avisar("Você precisa de R$ 50 para comprar a decoração.");
+    return;
+  }
+  dinheiro -= 50;
+  lucro -= 50;
+  decorada = true;
+  document.getElementById("decoracao").textContent =
+    "🪴 Decoração comprada! Sua cafeteria ficou mais aconchegante!";
+  avisar("Parabéns! Você melhorou sua cafeteria! ✨");
+  mostrar();
+}
 
-        document.getElementById("mensagem").textContent =
-          "Produto comprado com sucesso!";
-
-        atualizarTela();
-      } else {
-        document.getElementById("mensagem").textContent =
-          "Dinheiro insuficiente!";
-      }
-    }
-
-    function vender(nome) {
-      let produto = produtos[nome];
-
-      if (produto.estoque > 0) {
-        produto.estoque--;
-        dinheiro += produto.preco;
-        lucro += produto.preco - produto.custo;
-
-        document.getElementById("mensagem").textContent =
-          "Venda realizada! Você ganhou dinheiro.";
-
-        atualizarTela();
-      } else {
-        document.getElementById("mensagem").textContent =
-          "Sem estoque! Compre primeiro.";
-      }
-    }
-
-    atualizarTela();
-  </script>
+mostrar();
+</script>
 </body>
 </html>
