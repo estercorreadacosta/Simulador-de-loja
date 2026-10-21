@@ -6,6 +6,97 @@
 <title>Minha Cafeteria</title>
 <style>
 * { box-sizing: border-box; }
+  /* DECORAÇÃO DA MINHA CAFETERIA */
+
+body {
+  background: #f5e6d3;
+  color: #493126;
+  font-family: Arial, sans-serif;
+}
+
+.cafeteria {
+  max-width: 1000px;
+  margin: 25px auto;
+  padding: 20px;
+  background: linear-gradient(#fff8ed, #ead2b5);
+  border: 5px solid #8b5e3c;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px #5b382b35;
+}
+
+.balcao {
+  background: linear-gradient(#a66b42, #70452e);
+  color: white;
+  padding: 22px;
+  margin: 20px 0;
+  border-radius: 12px;
+  text-align: center;
+  border-bottom: 8px solid #51301f;
+}
+
+.area-mesas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding: 25px 5px;
+}
+
+.mesa {
+  width: 125px;
+  height: 85px;
+  background: #c68b59;
+  border: 7px solid #8b5e3c;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 7px 0 #6b422b;
+}
+
+.mesa::before,
+.mesa::after {
+  content: "🪑";
+  position: absolute;
+  font-size: 27px;
+}
+
+.mesa::before {
+  top: -32px;
+}
+
+.mesa::after {
+  bottom: -35px;
+}
+
+.luzes {
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 15px;
+  color: #8a5a16;
+  background: #fff0b8;
+  border-radius: 12px;
+  box-shadow: 0 0 22px #ffd76a80;
+}
+
+.planta {
+  text-align: center;
+  font-size: 35px;
+  margin: 10px;
+}
+
+@media (max-width: 600px) {
+  .cafeteria {
+    margin: 10px;
+    padding: 12px;
+  }
+
+  .area-mesas {
+    gap: 25px;
+  }
+}
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -84,6 +175,26 @@ footer { text-align: center; padding: 20px; color: #765b4a; }
 </header>
 
 <main>
+  <section class="cafeteria">
+  <div class="luzes">
+    ✨ 💡 ✨ MINHA CAFETERIA ✨ 💡 ✨
+  </div>
+
+  <div class="balcao">
+    ☕ BALCÃO DE ATENDIMENTO
+    <p>Pedidos feitos com carinho!</p>
+  </div>
+
+  <h2>🪑 Espaço dos clientes</h2>
+
+  <div class="area-mesas">
+    <div class="mesa">☕</div>
+    <div class="mesa">🍰</div>
+    <div class="mesa">🧁</div>
+  </div>
+
+  <div class="planta">🪴 🌿 🪴</div>
+</section>
   <section class="painel">
     <h2>📊 Situação da cafeteria</h2>
     <div class="resumo">
