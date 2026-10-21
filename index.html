@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Loja</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2563eb;
+    }
+
+    .painel {
+      background: white;
+      max-width: 500px;
+      margin: 15px auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px #00000012;
+    }
+
+    .produto {
+      border: 1px solid #cbd5e1;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .vender {
+      background: #16a34a;
+    }
+
+    .vender:hover {
+      background: #15803d;
+    }
+
+    #mensagem {
+      font-weight: bold;
+      min-height: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🏪 Minha Loja</h1>
+  <p>Seu primeiro simulador de negócios!</p>
+
+  <div class="painel">
+    <h2>📊 Situação da loja</h2>
+    <p>Dinheiro: <strong id="dinheiro">R$ 100,00</strong></p>
+    <p>Lucro total: <strong id="lucro">R$ 0,00</strong></p>
+    <p>Produtos em estoque: <strong id="estoque">0</strong></p>
+  </div>
+
+  <div class="painel">
+    <h2>📦 Produtos</h2>
+
+    <div class="produto">
+      <h3>🥤 Refrigerante</h3>
+      <p>Compra: R$ 5 | Venda: R$ 8</p>
+      <button onclick="comprar('refri')">
+        Comprar produto
+      </button>
+      <button class="vender" onclick="vender('refri')">
+        Vender produto
+      </button>
+      <p>Estoque: <span id="refri">0</span></p>
+    </div>
+
+    <div class="produto">
+      <h3>🍫 Chocolate</h3>
+      <p>Compra: R$ 3 | Venda: R$ 5</p>
+      <button onclick="comprar('chocolate')">
+        Comprar produto
+      </button>
+      <button class="vender" onclick="vender('chocolate')">
+        Vender produto
+      </button>
+      <p>Estoque: <span id="chocolate">0</span></p>
+    </div>
+
+    <p id="mensagem">Bem-vindo à sua loja!</p>
+  </div>
+
+  <script>
+    let dinheiro = 100;
+    let lucro = 0;
+
+    let produtos = {
+      refri: {
+        custo: 5,
+        preco: 8,
+        estoque: 0
+      },
+      chocolate: {
+        custo: 3,
+        preco: 5,
+        estoque: 0
+      }
+    };
+
+    function atualizarTela() {
+      document.getElementById("dinheiro").textContent =
+        dinheiro.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL"
+        });
+
+      document.getElementById("lucro").textContent =
+        lucro.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL"
+        });
+
+      let totalEstoque = 0;
+
+      for (let nome in produtos) {
+        document.getElementById(nome).textContent =
+          produtos[nome].estoque;
+
+        totalEstoque += produtos[nome].estoque;
+      }
+
+      document.getElementById("estoque").textContent =
+        totalEstoque;
+    }
+
+    function comprar(nome) {
+      let produto = produtos[nome];
+
+      if (dinheiro >= produto.custo) {
+        dinheiro -= produto.custo;
+        produto.estoque++;
+
+        document.getElementById("mensagem").textContent =
+          "Produto comprado com sucesso!";
+
+        atualizarTela();
+      } else {
+        document.getElementById("mensagem").textContent =
+          "Dinheiro insuficiente!";
+      }
+    }
+
+    function vender(nome) {
+      let produto = produtos[nome];
+
+      if (produto.estoque > 0) {
+        produto.estoque--;
+        dinheiro += produto.preco;
+        lucro += produto.preco - produto.custo;
+
+        document.getElementById("mensagem").textContent =
+          "Venda realizada! Você ganhou dinheiro.";
+
+        atualizarTela();
+      } else {
+        document.getElementById("mensagem").textContent =
+          "Sem estoque! Compre primeiro.";
+      }
+    }
+
+    atualizarTela();
+  </script>
+</body>
+</html>
