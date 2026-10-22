@@ -231,6 +231,17 @@ footer { text-align: center; padding: 20px; color: #765b4a; }
   </div>
 
   <div class="planta">🪴 🌿 🪴</div>
+    
+  <section class="painel area-clientes">
+    <h2>😊 Clientes da cafeteria</h2>
+    <div id="lista-clientes" class="lista-clientes">
+      <p>Aguardando o primeiro cliente...</p>
+    </div>
+    <p id="status-clientes" class="status-clientes">
+      ☕ A cafeteria está aberta!
+    </p>
+  </section>
+
 </section>
   <section class="painel">
     <h2>📊 Situação da cafeteria</h2>
@@ -342,6 +353,55 @@ function melhorar() {
   avisar("Parabéns! Você melhorou sua cafeteria! ✨");
   mostrar();
 }
+
+/* CLIENTES AUTOMÁTICOS */
+
+const rostosClientes = ["😊", "🧑", "👩", "🧔", "👩‍🦱"];
+let totalClientes = 0;
+
+function chegadaCliente() {
+  const area = document.getElementById("lista-clientes");
+  const status = document.getElementById("status-clientes");
+
+  totalClientes++;
+
+  const disponiveis = catalogo.filter(p => p.estoque > 0);
+
+  if (disponiveis.length === 0) {
+    area.innerHTML = `<div class="cliente">
+      <div class="rostinho">😕</div>
+      <p>Cliente ${totalClientes}</p>
+      <p>Não encontrou produtos!</p>
+    </div>`;
+    status.textContent = "📦 Abasteça o estoque para vender!";
+    return;
+  }
+
+  const rosto = rostosClientes[
+    Math.floor(Math.random() * rostosClientes.length)
+  ];
+
+  const produto = disponiveis[
+    Math.floor(Math.random() * disponiveis.length)
+  ];
+
+  produto.estoque--;
+  dinheiro += produto.venda;
+  lucro += produto.venda;
+
+  area.innerHTML = `<div class="cliente">
+    <div class="rostinho">${rosto}</div>
+    <p>Cliente ${totalClientes}</p>
+    <p>Comprou ${produto.nome}!</p>
+    <p>Pagou ${moeda(produto.venda)}</p>
+    <p>❤️ Obrigado pela visita!</p>
+  </div>`;
+
+  status.textContent = "🛍️ Um cliente fez uma compra!";
+  mostrar();
+}
+
+setInterval(chegadaCliente, 8000);
 
 mostrar();
 </script>
